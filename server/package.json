@@ -10,7 +10,6 @@
   "author": "Kurt Jensen",
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "cors": "^2.8.5",
     "express": "~4.16.1",
     "graphql": "^16.6.0",
     "mongoose": "^7.0.4",
