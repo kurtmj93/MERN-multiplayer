@@ -7,26 +7,23 @@ import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const Signup = () => {
+    const [form] = Form.useForm();
     const [userFormData, setUserFormData] = useState({ username: '', email: '', password: ''});
-    const [validated] = useState(false);
-    const [showAlert, setShowAlert] = useState(false);
     const [addUser, { error }] = useMutation(ADD_USER);
 
     const submissionFailed = (err) => {
         console.error(err);
-        setShowAlert(true);
     };
 
-    const submitForm = async (data) => {
-
+    const submitForm = async (values) => {
+        console.log(values);
         try {
             const {data} = await addUser({
-                variables: {...userFormData}});
+                variables: values});
 
             Auth.login(data.addUser.token);
         } catch (err) {
             console.error(err);
-            setShowAlert(true);
         }
 
         setUserFormData({ // (reset after submission)
@@ -38,7 +35,8 @@ const Signup = () => {
 
     return (
         <Form
-    name="basic"
+        form={form}
+    name="signup"
     labelCol={{
       span: 8,
     }}
@@ -47,9 +45,6 @@ const Signup = () => {
     }}
     style={{
       maxWidth: 600,
-    }}
-    initialValues={{
-      remember: true,
     }}
     onFinish={submitForm}
     onFinishFailed={submissionFailed}
