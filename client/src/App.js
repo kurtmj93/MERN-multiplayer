@@ -6,7 +6,11 @@ import Signup from './components/Signup';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Login from './components/Login';
+import Chat from './components/Chat';
 import Logo from './assets/mmlogo.png';
+import FourOhFour from './components/404';
+
+import Auth from './utils/auth';
 
 // import antd components & css AFTER antd
 import { Layout } from 'antd';
@@ -49,10 +53,17 @@ function App() {
             <Content style={{
                 padding: '0 50px',
               }}>
-              <Routes>
+              <Routes> {/* This Routes Auth.loggedIn() logic handles not serving particular component routes to non-logged-in users. This might not be a best practice? But it works. */}
                 <Route index element={<Home/>} />
+                { Auth.loggedIn() ? (
+                <Route path='/chat' element={<Chat/>} /> 
+                ) : (
+                <>
                 <Route path='/signup' element={<Signup/>} />
                 <Route path='/login' element={<Login/>} />
+                </>
+                )}
+                <Route path='*' element={<FourOhFour />} />
               </Routes>
             </Content>
         </Router>

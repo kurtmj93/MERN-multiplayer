@@ -10,6 +10,12 @@ const loggedInItems = [
             <Link to='/'>Home</Link>
         )
     },
+    { 
+        ket: 'chat',
+        label: (
+            <Link to='/chat'>Chat</Link>
+        )
+    },
     {
         key: 'logout',
         label: (
