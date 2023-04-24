@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {  Button, Form, Input  } from 'antd';
+import {  Button, Form, Input, Space  } from 'antd';
 
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
@@ -28,12 +28,19 @@ const Login = () => {
         });
     };
     return (
-        <Form form={form} className="login-form" name="login" onFinish={submitForm} layout="vertical" 
-        style={{
-            margin: '16px 4px 4px 4px'
-        }}>
+      <div><h2>Login</h2>
+      <Form
+      form={form}
+  name="login"
+  style={{
+    maxWidth: 600,
+  }}
+  onFinish={submitForm}
+  autoComplete="off"
+>
 
         <Form.Item
+          label="Username"
           name="username"
           rules={[
             {
@@ -42,9 +49,10 @@ const Login = () => {
             },
           ]}
         >
-          <Input placeholder="Username" />
+          <Input />
         </Form.Item>
         <Form.Item
+          label="Password"
           name="password"
           rules={[
             {
@@ -53,11 +61,13 @@ const Login = () => {
             },
           ]}
         >
-          <Input
-            type="password"
-            placeholder="Password"
-          />
+          <Input.Password />
         </Form.Item>
+        <Space
+        wrapperCol={{
+          offset: 8,
+          span: 1,
+        }}>
         <Form.Item shouldUpdate>
           {() => (
             <Button
@@ -66,13 +76,20 @@ const Login = () => {
               disabled={
                 !form.isFieldsTouched(true) ||
                 !!form.getFieldsError().filter(({ errors }) => errors.length).length
-              }
-            >
+              }>
               Log in
             </Button>
           )}
         </Form.Item>
+        <Form.Item>
+            <Button
+              type="ghost" href="/signup">
+                Create an account
+            </Button>
+        </Form.Item>
+        </Space>
       </Form>
+    </div>
     )
 };
 

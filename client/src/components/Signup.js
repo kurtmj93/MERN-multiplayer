@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Space } from 'antd';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -34,15 +34,10 @@ const Signup = () => {
     }
 
     return (
+    <div><h2>Signup</h2>
         <Form
         form={form}
     name="signup"
-    labelCol={{
-      span: 8,
-    }}
-    wrapperCol={{
-      span: 16,
-    }}
     style={{
       maxWidth: 600,
     }}
@@ -88,18 +83,28 @@ const Signup = () => {
     >
       <Input.Password />
     </Form.Item>
-
-    <Form.Item
-      wrapperCol={{
-        offset: 8,
-        span: 16,
-      }}
-    >
-      <Button type="primary" htmlType="submit">
-        Submit
+  <Space>
+    <Form.Item shouldUpdate>
+    {() => (
+      <Button type="primary" 
+      htmlType="submit"
+      disabled={
+        !form.isFieldsTouched(true) ||
+        !!form.getFieldsError().filter(({ errors }) => errors.length).length
+      }>
+        Create Account
       </Button>
+    )}
     </Form.Item>
+    <Form.Item>
+            <Button
+              type="ghost" href="/login">
+                Login instead
+            </Button>
+    </Form.Item>
+  </Space>
   </Form>
+  </div>
     );
 };
 

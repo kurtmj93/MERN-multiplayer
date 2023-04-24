@@ -8,12 +8,11 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Logo from './assets/mmlogo.png';
 
-import './app.css';
-
 import Auth from './utils/auth';
 
-// import antd components
+// import antd components & css AFTER antd
 import { Layout } from 'antd';
+import './app.css'; 
 // import apollo components
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
@@ -48,11 +47,6 @@ function App() {
           <Sider theme="light" breakpoint="lg" collapsedWidth="0">
             <div className="logo"><a href="/"><img src={Logo} /></a></div>
             <Navbar/>
-            { Auth.loggedIn() ? ( 
-             <></>
-            ) : (
-              <Login/>
-            )}
           </Sider>
             <Content style={{
                 padding: '0 50px',
@@ -60,6 +54,7 @@ function App() {
               <Routes>
                 <Route index element={<Home/>} />
                 <Route path='/signup' element={<Signup/>} />
+                <Route path='/login' element={<Login/>} />
               </Routes>
             </Content>
         </Router>

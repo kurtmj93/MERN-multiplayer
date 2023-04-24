@@ -27,6 +27,12 @@ const loggedOutItems = [
         )
     },
     {
+        key: 'login',
+        label: (
+            <Link to='/login'>Login</Link>
+        )
+    },
+    {
         key: 'signup',
         label: (
             <Link to='/signup'>Signup</Link>
