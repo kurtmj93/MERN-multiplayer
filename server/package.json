@@ -9,17 +9,19 @@
   },
   "author": "Kurt Jensen",
   "dependencies": {
+    "apollo-server-core": "^3.12.0",
     "apollo-server-express": "^2.15.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "~4.16.1",
     "graphql": "^15.5.0",
+    "graphql-ws": "^5.12.1",
+    "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.4",
     "nodemon": "^2.0.22",
-    "socket.io": "^4.6.1",
-    "universal-cookie": "^4.0.4",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "ws": "^8.13.0"
   }
 }

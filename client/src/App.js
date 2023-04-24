@@ -47,7 +47,7 @@ function App() {
       <Layout>
         <Router>
           <Sider theme="light" breakpoint="lg" collapsedWidth="0">
-            <div className="logo"><a href="/"><img alt="MM Logo" src={Logo} /></a></div>
+            <div className="logo"><a href="/"><img alt="MM Logo" src={Logo} /></a></div> {/* This `a href=` (rather than `Link to=`) ensures that the window.location fires and Home is selected in the menu. May be a better React way to handle this, performance-wise, but it seems to reduce code needed for this small use case? */}
             <Navbar/>
           </Sider>
             <Content style={{

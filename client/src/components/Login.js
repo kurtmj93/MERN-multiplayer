@@ -63,11 +63,7 @@ const Login = () => {
         >
           <Input.Password />
         </Form.Item>
-        <Space
-        wrapperCol={{
-          offset: 8,
-          span: 1,
-        }}>
+        <Space>
         <Form.Item shouldUpdate>
           {() => (
             <Button

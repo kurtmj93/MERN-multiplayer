@@ -1,18 +1,10 @@
 import React, {useState} from 'react';
 import {  Button, Form, Input, Space  } from 'antd';
 
-import { io } from 'socket.io-client';
-
-
 const Chat = () => {
-    const socket = io(`ws://localhost:3001`);
-    socket.on('connect', () => {
-        console.log('you are connected with id: ' + socket.id);
-    })
     const [form] = Form.useForm();
     const [message, setMessage] = useState('');
     const submitForm = (message) => {
-        socket.emit(message);
         setMessage(''); // reset after submission
     };
     return (
