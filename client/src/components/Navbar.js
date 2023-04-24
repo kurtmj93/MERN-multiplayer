@@ -27,14 +27,6 @@ const loggedOutItems = [
         )
     },
     {
-        key: 'login',
-        label: (
-            <>
-            <Login />
-            </>
-        )
-    },
-    {
         key: 'signup',
         label: (
             <Link to='/signup'>Signup</Link>
@@ -53,9 +45,9 @@ const Navbar = () => {
     return (
         <>
         { Auth.loggedIn() ? ( 
-            <Menu theme="dark" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={loggedInItems}/> 
+            <Menu onClick={onClick} theme="light" selectedKeys={[current]} mode="vertical" items={loggedInItems}/> 
             ) : (
-            <Menu theme="dark" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={loggedOutItems}/>
+            <Menu onClick={onClick} theme="light" selectedKeys={[current]} mode="vertical" items={loggedOutItems}/>
         )}
         </>
     );

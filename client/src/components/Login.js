@@ -28,7 +28,11 @@ const Login = () => {
         });
     };
     return (
-        <Form form={form} name="horizontal_login" layout="inline" onFinish={submitForm}>
+        <Form form={form} className="login-form" name="login" onFinish={submitForm} layout="vertical" 
+        style={{
+            margin: '16px 4px 4px 4px'
+        }}>
+
         <Form.Item
           name="username"
           rules={[
