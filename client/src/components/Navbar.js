@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
-import Login from './Login';
 import Auth from '../utils/auth';
 
 const loggedInItems = [

@@ -8,8 +8,6 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Logo from './assets/mmlogo.png';
 
-import Auth from './utils/auth';
-
 // import antd components & css AFTER antd
 import { Layout } from 'antd';
 import './app.css'; 
@@ -45,7 +43,7 @@ function App() {
       <Layout>
         <Router>
           <Sider theme="light" breakpoint="lg" collapsedWidth="0">
-            <div className="logo"><a href="/"><img src={Logo} /></a></div>
+            <div className="logo"><a href="/"><img alt="MM Logo" src={Logo} /></a></div>
             <Navbar/>
           </Sider>
             <Content style={{
