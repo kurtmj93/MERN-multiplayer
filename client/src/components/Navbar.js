@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
+import Login from './Login';
 import Auth from '../utils/auth';
 
-const navItems = [
+const loggedInItems = [
+    {
+        key: 'home',
+        label: (
+            <Link to='/'>Home</Link>
+        )
+    },
+    {
+        key: 'logout',
+        label: (
+            <Link onClick={Auth.logout}>Logout</Link>
+        )
+    }
+];
+
+const loggedOutItems = [
     {
         key: 'home',
         label: (
@@ -13,7 +29,9 @@ const navItems = [
     {
         key: 'login',
         label: (
-            <Link to='/login'>Login</Link>
+            <>
+            <Login />
+            </>
         )
     },
     {
@@ -22,7 +40,7 @@ const navItems = [
             <Link to='/signup'>Signup</Link>
         )
     },
-];
+]
 
 const Navbar = () => {
     let loc = window.location.href.split('/')[3];
@@ -33,7 +51,13 @@ const Navbar = () => {
     };
     
     return (
-        <Menu theme="dark" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={navItems}/>
+        <>
+        { Auth.loggedIn() ? ( 
+            <Menu theme="dark" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={loggedInItems}/> 
+            ) : (
+            <Menu theme="dark" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={loggedOutItems}/>
+        )}
+        </>
     );
 };
 
