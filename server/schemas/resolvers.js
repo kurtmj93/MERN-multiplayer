@@ -1,18 +1,16 @@
-const { User } = require('../models');
+const { User, Chat } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 // import sign token function from auth
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
-      if (context.user) {
-        const userMe = await User.findOne({_id: context.user._id}).select('-__v -password');
-        return userMe;
-      } else {
-        throw new AuthenticationError('You need to be logged-in!');
-      }
-    }
+    chat: async () => {
+      return await Chat.find().populate('user');
+    },
+    users: async () => {
+      return await User.find().exec();
+    },
   },
   Mutation: {
     login: async (parent, { username, password }) => {
@@ -34,6 +32,13 @@ const resolvers = {
       const user = await User.create({username, email, password});
       const token = signToken(user);
       return { token, user };
+    },
+    postMessage: async (parent, {message, userId} ) => {
+      const chat = new Chat();
+      chat.user = userId;
+      chat.message = message;
+      await chat.save();
+      return chat;
     }
   }
 };

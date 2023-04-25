@@ -46,15 +46,11 @@ const apolloServer = new ApolloServer({
 
 PORT = process.env.PORT || 3001;
 
-// const io = require('socket.io')(server);
-
-const startServer = async (typeDefs, resolvers) => {
+const startServer = async () => {
   await apolloServer.start();
   apolloServer.applyMiddleware({app});
 
   db.once('open', () => {
-
-    // NOTE: apparently, app.listen is not recommended, but I couldnt get graphql playground to load using the recommended httpserver method
     const http = httpServer.listen(PORT, () => { 
       console.log(`Server running at http://localhost:${PORT}`);
       console.log(`Use GraphQL at http://localhost:${PORT}${apolloServer.graphqlPath}`);

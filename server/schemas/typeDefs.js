@@ -7,8 +7,10 @@ const typeDefs = gql`
     email: String!
   }
 
-  type Query {
-    me: User
+  type Chat {
+    _id: ID!
+    message: String!
+    user: User!
   }
 
   type Auth {
@@ -16,9 +18,15 @@ const typeDefs = gql`
     user: User
   }
 
+  type Query {
+    chat: [Chat]
+    users: [User]
+  }
+
   type Mutation {
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
+    postMessage(message: String!, userId: ID!): Chat
   }
 `;
 
