@@ -23,3 +23,27 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const SEND_CHAT = gql`
+  mutation postMessage($message: String!, $userId: ID!) {
+    postMessage(message: $message, user: $userId) {
+      message
+      createdAt
+      user {
+        username
+      }
+    }
+  }
+`;
+
+export const GET_CHAT = gql`
+  subscription getChat {
+    chatSent {
+      message
+      createdAt
+      user {
+        username
+      }
+    }
+  }
+`;

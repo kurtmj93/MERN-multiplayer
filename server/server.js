@@ -25,6 +25,7 @@ const wsServer = new WebSocketServer({
   server: httpServer,
   path: '/graphql'
 });
+
 // Save the returned server's info so we can shutdown this server later
 const serverCleanup = useServer({ schema }, wsServer);
 
@@ -51,7 +52,6 @@ const startServer = async () => {
   await server.start();
   app.use('/graphql', cors(), bodyParser.json(), expressMiddleware(server));
   PORT = process.env.PORT || 3001;
-
   db.once('open', () => {
     httpServer.listen(PORT, () => { 
       console.log(`Server running at http://localhost:${PORT}`);

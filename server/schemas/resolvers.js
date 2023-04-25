@@ -1,5 +1,7 @@
 const { User, Chat } = require('../models');
 const { GraphQLError } = require('graphql');
+const { PubSub } = require('graphql-subscriptions');
+const pubsub = new PubSub();
 
 // import sign token function from auth
 const { signToken } = require('../utils/auth');
@@ -38,8 +40,24 @@ const resolvers = {
       const chat = new Chat();
       chat.user = userId;
       chat.message = message;
-      await chat.save();
+      const result = await chat.save();
+      const res = await Chat.findById(result._id).populate('user');
+      chat.user.username = res.user.username;
+      pubsub.publish('CHAT_SENT', {
+        chatSent: {
+          message,
+          createdAt: chat.createdAt,
+          user: {
+            username: chat.user.username
+          }
+        }
+      });
       return chat;
+    }
+  },
+  Subscription: {
+    chatSent: {
+      subscribe: () => pubsub.asyncIterator(['CHAT_SENT']),
     }
   }
 };

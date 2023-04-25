@@ -11,6 +11,7 @@ const typeDefs = gql`
     _id: ID!
     message: String!
     user: User!
+    createdAt: String!
   }
 
   type Auth {
@@ -27,6 +28,10 @@ const typeDefs = gql`
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     postMessage(message: String!, userId: ID!): Chat
+  }
+
+  type Subscription {
+    chatSent: Chat
   }
 `;
 
