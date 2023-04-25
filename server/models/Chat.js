@@ -14,6 +14,7 @@ const chatSchema = new Schema(
   },
   {
     timestamps: true,
+    get: time => time.toDateString(),
     toJSON: {
       virtuals: true,
     },

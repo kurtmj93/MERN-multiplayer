@@ -16,11 +16,9 @@ const Signup = () => {
     };
 
     const submitForm = async (values) => {
-        console.log(values);
         try {
             const {data} = await addUser({
                 variables: values});
-
             Auth.login(data.addUser.token);
         } catch (err) {
             console.error(err);

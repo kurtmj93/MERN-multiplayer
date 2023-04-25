@@ -26,7 +26,7 @@ export const ADD_USER = gql`
 
 export const SEND_CHAT = gql`
   mutation postMessage($message: String!, $userId: ID!) {
-    postMessage(message: $message, user: $userId) {
+    postMessage(message: $message, userId: $userId) {
       message
       createdAt
       user {
