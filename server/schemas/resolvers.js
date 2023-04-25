@@ -1,5 +1,6 @@
 const { User, Chat } = require('../models');
-const { AuthenticationError } = require('apollo-server-express');
+const { GraphQLError } = require('graphql');
+
 // import sign token function from auth
 const { signToken } = require('../utils/auth');
 
@@ -17,12 +18,12 @@ const resolvers = {
 
       const user = await User.findOne({ username });
       if (!user) {
-        throw new AuthenticationError('No user with that email.');
+        throw new GraphQLError('No user with that email.');
       }
 
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect password.');
+        throw new GraphQLError('Incorrect password.');
       }
 
       const token = signToken(user);

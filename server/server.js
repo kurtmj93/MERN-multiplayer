@@ -1,37 +1,40 @@
-// import packages 
+// import packages and functions 
 const express = require('express');
-const cors = require('cors');
-const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core');
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
+const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer');
 const { createServer } = require('http');
 const { WebSocketServer } = require('ws');
 const { useServer } = require('graphql-ws/lib/use/ws');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
 // import db and graphQL schema
 const db = require('./config/connection');
 const { typeDefs, resolvers } = require ('./schemas');
+const schema = makeExecutableSchema({typeDefs, resolvers});
 
+// Create an Express app and HTTP server; we will attach both 
+// the WebSocket server and the ApolloServer to this HTTP server.
 const app = express();
-// app.use cors and express middleware
-app.use(cors());
-app.use(express.urlencoded({ extended: true })); // express middleware
-app.use(express.json());
-
 const httpServer = createServer(app);
 
+// Create our WebSocket server using the HTTP server we just set up.
 const wsServer = new WebSocketServer({
   server: httpServer,
-  path: '/graphql',
+  path: '/graphql'
 });
+// Save the returned server's info so we can shutdown this server later
+const serverCleanup = useServer({ schema }, wsServer);
 
-const serverCleanup = useServer({ typeDefs, resolvers }, wsServer);
-
+// add authMiddleware for context and set up ApolloServer
 const { authMiddleware } = require('./utils/auth');
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
+const server = new ApolloServer({
+  schema,
   context: authMiddleware,
   plugins: [
-    ApolloServerPluginDrainHttpServer({ httpServer }),
+    ApolloServerPluginDrainHttpServer({httpServer}),
     {
       async serverWillStart() {
         return {
@@ -41,22 +44,20 @@ const apolloServer = new ApolloServer({
         };
       },
     },
-  ],
+  ]
 });
 
-PORT = process.env.PORT || 3001;
-
 const startServer = async () => {
-  await apolloServer.start();
-  apolloServer.applyMiddleware({app});
+  await server.start();
+  app.use('/graphql', cors(), bodyParser.json(), expressMiddleware(server));
+  PORT = process.env.PORT || 3001;
 
   db.once('open', () => {
-    const http = httpServer.listen(PORT, () => { 
+    httpServer.listen(PORT, () => { 
       console.log(`Server running at http://localhost:${PORT}`);
-      console.log(`Use GraphQL at http://localhost:${PORT}${apolloServer.graphqlPath}`);
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
   });
-
 };
 
 startServer();
