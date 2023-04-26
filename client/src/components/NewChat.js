@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useSubscription} from '@apollo/client';
-import { List } from 'antd';
+import { List, Skeleton } from 'antd';
 
 import {SUBSCRIBE_CHAT} from '../utils/mutations';
 
@@ -19,13 +19,14 @@ const NewChat = () => {
     }}, [data]);
 
         return (
-            <List itemLayout="hortizontal">
-                {chats.map((o) => (
+            <List className="chatbox" itemLayout="hortizontal" height="200">
+                {[...chats].reverse().map((o) => (
                     <List.Item>
                         <List.Item.Meta
                             title={o.username}
-                            description={o.message}
+                            description={o.createdAt}
                             />
+                            <div className="chatcontent">{o.message}</div>
                     </List.Item>
                 ))}
             </List>

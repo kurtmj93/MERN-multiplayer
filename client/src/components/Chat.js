@@ -28,30 +28,23 @@ const Chat = () => {
     return (
 <div><h2>Chat</h2>
 
-<ul>
-  <NewChat />
-</ul>
-
 <Form form={form}
   name="chat"
-  style={{
-    maxWidth: 600,
-  }}
+  layout="inline"
   onFinish={submitForm}
   autoComplete="off"
 >
-    <Space>
+
         <Form.Item
-          label="Message"
           name="message"
           rules={[
             {
               required: true,
               message: 'Input a chat!',
-            },
+            }
           ]}
         >
-          <Input />
+          <Input showCount maxLength={140} />
         </Form.Item>
         <Form.Item shouldUpdate>
             {() => (
@@ -66,9 +59,12 @@ const Chat = () => {
                 </Button>
             )}
         </Form.Item>
-    </Space>
+
 </Form>
+
+<NewChat />
 </div>
+
 )
 };
 

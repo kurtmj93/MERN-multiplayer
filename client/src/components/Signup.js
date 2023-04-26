@@ -53,7 +53,7 @@ const Signup = () => {
         },
       ]}
     >
-      <Input />
+      <Input showCount maxLength={10} />
     </Form.Item>
 
     <Form.Item

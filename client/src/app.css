@@ -3,3 +3,12 @@
     margin-top: 16px;
     margin-bottom: 12px;
   }
+
+  .ant-list-item-meta-content {
+    width: 35%;
+  }
+
+  .chatbox .chatcontent {
+    width: 65%;
+    text-align: left;
+  }
