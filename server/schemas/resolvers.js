@@ -45,6 +45,7 @@ const resolvers = {
       chat.user.username = res.user.username;
       pubsub.publish('CHAT_SENT', {
         chatSent: {
+          _id: chat._id,
           message,
           createdAt: chat.createdAt.toLocaleTimeString(),
           user: {

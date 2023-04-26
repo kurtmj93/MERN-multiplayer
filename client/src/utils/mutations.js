@@ -37,8 +37,21 @@ export const SEND_CHAT = gql`
 `;
 
 export const GET_CHAT = gql`
-  subscription getChat {
+query getChat {
+  chat {
+    message
+    createdAt
+    user {
+      username
+    }
+  }
+}
+`
+
+export const SUBSCRIBE_CHAT = gql`
+  subscription subscribeChat {
     chatSent {
+      _id
       message
       createdAt
       user {
