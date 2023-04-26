@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useSubscription} from '@apollo/client';
+import { List } from 'antd';
+
 import {SUBSCRIBE_CHAT} from '../utils/mutations';
 
 const NewChat = () => {
@@ -15,16 +17,19 @@ const NewChat = () => {
             createdAt: data.chatSent.createdAt
         }]);
     }}, [data]);
-    
-    if (chats) {
+
         return (
-            <ul>
+            <List itemLayout="hortizontal">
                 {chats.map((o) => (
-                    <li key={o.id}>{o.message} - sent by {o.username} at {o.createdAt}</li>
+                    <List.Item>
+                        <List.Item.Meta
+                            title={o.username}
+                            description={o.message}
+                            />
+                    </List.Item>
                 ))}
-            </ul>
-        )
-    };
+            </List>
+        );
 };
 
 export default NewChat;

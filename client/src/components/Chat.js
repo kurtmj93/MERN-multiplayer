@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import {  Button, Form, Input, Space } from 'antd';
-import { useSubscription, useMutation, useQuery } from '@apollo/client';
-import { GET_CHAT, SEND_CHAT, SUBSCRIBE_CHAT } from '../utils/mutations';
+import React from 'react';
+import { Button, Form, Input, Space } from 'antd';
+import { useMutation } from '@apollo/client';
+import { SEND_CHAT } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 import NewChat from './NewChat';
