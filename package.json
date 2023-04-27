@@ -11,6 +11,7 @@
   "author": "Kurt Jensen",
   "license": "MIT",
   "dependencies": {
-    "concurrently": "^8.0.1"
+    "concurrently": "^8.0.1",
+    "mongodb": "3.7"
   }
 }
