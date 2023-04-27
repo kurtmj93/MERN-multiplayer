@@ -5,6 +5,7 @@ const typeDefs = gql`
     _id: ID!
     username: String!
     email: String!
+    isActive: Boolean!
   }
 
   type Chat {
@@ -22,12 +23,14 @@ const typeDefs = gql`
   type Query {
     chat: [Chat]
     users: [User]
+    activeUsers: [User]
   }
 
   type Mutation {
     login(username: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     postMessage(message: String!, userId: ID!): Chat
+    logout(userId: ID!): User
   }
 
   type Subscription {

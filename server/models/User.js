@@ -17,6 +17,10 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    isActive: {
+      type: Boolean,
+      required: true
     }
   },
   {

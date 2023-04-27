@@ -6,6 +6,7 @@ import { SEND_CHAT } from '../utils/mutations';
 import Auth from '../utils/auth';
 import NewChat from './NewChat';
 import OldChat from './OldChat';
+import ActiveUsers from './ActiveUsers';
 
 
 const Chat = () => {
@@ -29,6 +30,8 @@ const Chat = () => {
 
     return (
 <div><h2>Chat</h2>
+
+<div>Active Users: <ActiveUsers/></div>
 
 <Form form={form}
   name="chat"
