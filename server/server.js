@@ -1,6 +1,7 @@
 // import packages and functions 
 const express = require('express');
 const path = require('path');
+require("dotenv").config();
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer');
