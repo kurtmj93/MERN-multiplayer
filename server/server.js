@@ -1,5 +1,6 @@
 // import packages and functions 
 const express = require('express');
+const path = require('path');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer');
@@ -18,6 +19,16 @@ const schema = makeExecutableSchema({typeDefs, resolvers});
 // Create an Express app and HTTP server; we will attach both 
 // the WebSocket server and the ApolloServer to this HTTP server.
 const app = express();
+
+if (process.env.NODE_ENV === 'production') { 
+  app.use(express.static(path.join(__dirname, '../client/build')));
+};
+
+app.get('/', (req, res) => { // fix heroku deployment GET path ="/" error
+  res.sendFile(path.join(__dirname, '../client/'));
+});
+
+
 const httpServer = createServer(app);
 
 // Create our WebSocket server using the HTTP server we just set up.
