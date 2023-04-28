@@ -22,12 +22,8 @@ const schema = makeExecutableSchema({typeDefs, resolvers});
 const app = express();
 
 if (process.env.NODE_ENV === 'production') { 
-  app.use(express.static(path.join(__dirname, '../client/build')));
+  app.use(express.static(path.join(__dirname, '../client/public')));
 };
-
-app.get('/', (req, res) => { // fix heroku deployment GET path ="/" error
-  res.sendFile(path.join(__dirname, '../client/'));
-});
 
 
 const httpServer = createServer(app);
