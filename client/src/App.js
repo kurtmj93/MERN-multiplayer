@@ -27,7 +27,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'ws://fast-ocean-08545.herokuapp.com/graphql',
+  url: 'wss://fast-ocean-08545.herokuapp.com/graphql',
   connectionParams: {
     authToken: localStorage.getItem('id_token'),
   }
