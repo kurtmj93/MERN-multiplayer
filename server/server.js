@@ -20,15 +20,16 @@ const schema = makeExecutableSchema({typeDefs, resolvers});
 // Create an Express app and HTTP server; we will attach both 
 // the WebSocket server and the ApolloServer to this HTTP server.
 const app = express();
+const __dirname = path.resolve()
 
 if (process.env.NODE_ENV === 'production') { 
   app.use(express.static(path.join(__dirname, '../client/build')));
+  app.get('*', (req, res) => // needed for react-router on heroku deploy
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))) 
 };
 
 // need this for deploy to heroku - react-router wasn't working
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+
 
 const httpServer = createServer(app);
 
