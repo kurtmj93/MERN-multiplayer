@@ -23,11 +23,11 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3001/graphql'
+  uri: 'https://fast-ocean-08545.herokuapp.com/graphql'
 });
 
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'ws://localhost:3001/graphql',
+  url: 'ws://fast-ocean-08545.herokuapp.com/graphql',
   connectionParams: {
     authToken: localStorage.getItem('id_token'),
   }
