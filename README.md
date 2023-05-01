@@ -4,9 +4,17 @@
 
   ## Description
 
-  A multiplayer game platform built with a MERN stack and GraphQL subscriptions facilitating real-time game state updates.
+  A multiplayer game platform built with a MERN stack - MongoDB/Mongoose, Express, React, Node.js - and GraphQL api with subscriptions over a websocket connection to facilitate real-time game state updates. Uses Ant Design for styling.
 
   Currently, real-time chat functionality is deployed. Games to come!
+
+### Deployed Screenshot
+
+![screenshot](./mern-chat-screenshot.png)
+
+  ### Deployed Link
+
+Deployed at: [https://fast-ocean-08545.herokuapp.com/](https://fast-ocean-08545.herokuapp.com/)
 
   ## Table of Contents
 
