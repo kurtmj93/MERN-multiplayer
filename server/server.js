@@ -25,6 +25,11 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 };
 
+// need this for deploy to heroku - react-router wasn't working
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 const httpServer = createServer(app);
 
 // Create our WebSocket server using the HTTP server we just set up.
