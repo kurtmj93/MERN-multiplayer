@@ -24,7 +24,7 @@ const __dirname = path.resolve()
 
 if (process.env.NODE_ENV === 'production') { 
   app.use(express.static(path.join(__dirname, '../client/build')));
-  app.get('*', (req, res) => // needed for react-router on heroku deploy
+  app.get('/*', (req, res) => // needed for react-router on heroku deploy
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))) 
 };
 
